@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea
+      id="hex-map"
+      placeholder="paste hex key map here"
+      style="width: 100%"
+    ></textarea>
+
+    <button id="convert-hex-map">convert hex map</button>
+    <p><code id="result-hex-map"></code></p>
+
+    <br />
+    <br />
+
+    <textarea
+      id="base64-hash"
+      placeholder="paste base64 key hash here"
+      style="width: 100%"
+    ></textarea>
+    <button id="convert-base64-hash">Convert base64 hash</button>
+    <p><code id="result-base64-hash"></code></p>
+
+    <script>
+      document
+        .getElementById("convert-hex-map")
+        .addEventListener("click", function () {
+          document.getElementById("result-hex-map").textContent = btoa(
+            document
+              .getElementById("hex-map")
+              .value.split(":")
+              .map((hc) => String.fromCharCode(parseInt(hc, 16)))
+              .join("")
+          );
+        });
+
+      document
+        .getElementById("convert-base64-hash")
+        .addEventListener("click", function () {
+          document.getElementById("result-base64-hash").textContent = atob(
+            document.getElementById("base64-hash").value
+          )
+            .split("")
+            .map((c) => c.charCodeAt(0).toString(16))
+            .join(":");
+        });
+    </script>
+  </body>
+</html>
